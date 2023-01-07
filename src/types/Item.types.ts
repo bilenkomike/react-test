@@ -6,4 +6,6 @@ export interface ItemInterface {
   area: number;
   nativeName: string;
   flag: string;
+  wishlist?: boolean;
+  action?: (name: string) => void;
 }

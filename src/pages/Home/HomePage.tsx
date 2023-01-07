@@ -1,11 +1,3 @@
-// import React from "react";
-
-// function App() {
-//   return <div className="App"></div>;
-// }
-
-// export default App;
-
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,20 +5,30 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import Item from "../../components/Item/Item";
+import { CircularProgress } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
 
 const HomePage: React.FC = () => {
   const [countries, setCountries] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://restcountries.com/v2/all")
       .then((response) => {
-        setCountries(response.data);
+        let begin = (page - 1) * 15;
+        let countriess = response.data.slice(begin, begin + 15);
+        setCountries(countriess);
+        setLoading(false);
       })
       .catch((e) => {
         alert("Something Wrong");
         alert(e);
       });
-  }, []);
+  }, [page]);
+
   return (
     <main>
       <Box
@@ -49,10 +51,10 @@ const HomePage: React.FC = () => {
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="md">
-        {/* End hero unit */}
-
         <Grid container spacing={4}>
-          {countries !== null &&
+          {loading && <CircularProgress style={{ margin: "auto" }} />}
+          {!loading &&
+            countries !== null &&
             countries.map((country: any) => (
               <Grid item key={country.name} xs={12} sm={6} md={4}>
                 <Item
@@ -67,33 +69,20 @@ const HomePage: React.FC = () => {
               </Grid>
             ))}
         </Grid>
+        {!loading && (
+          <Pagination
+            count={17}
+            page={page}
+            onChange={(event: React.ChangeEvent<unknown>, value: number) =>
+              setPage(value)
+            }
+            color="primary"
+            style={{ margin: "auto" }}
+          />
+        )}
       </Container>
     </main>
   );
 };
 
 export default HomePage;
-
-// function Router(props: { children?: React.ReactNode }) {
-//   const { children } = props;
-//   if (typeof window === 'undefined') {
-//     return <StaticRouter location="/">{children}</StaticRouter>;
-//   }
-
-//   return <MemoryRouter>{children}</MemoryRouter>;
-// }
-
-// const theme = createTheme({
-//   components: {
-//     MuiLink: {
-//       defaultProps: {
-//         component: LinkBehavior,
-//       } as LinkProps,
-//     },
-//     MuiButtonBase: {
-//       defaultProps: {
-//         LinkComponent: LinkBehavior,
-//       },
-//     },
-//   },
-// });

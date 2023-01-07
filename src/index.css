@@ -24,3 +24,8 @@ li {
   list-style-type: none;
   padding: 0;
 }
+
+.MuiPagination-ul.css-wjh20t-MuiPagination-ul {
+  margin-top: 20px;
+  justify-content: center;
+}

@@ -11,7 +11,6 @@ import { ItemInterface } from "../../types/Item.types";
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
-  MemoryRouter,
 } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { LinkProps } from "@mui/material/Link";
@@ -21,7 +20,6 @@ const LinkBehavior = React.forwardRef<
   Omit<RouterLinkProps, "to"> & { href: RouterLinkProps["to"] }
 >((props, ref) => {
   const { href, ...other } = props;
-  // Map href (MUI) -> to (react-router)
   return (
     <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />
   );
@@ -51,8 +49,21 @@ const theme = createTheme({
 });
 
 const Item = (props: ItemInterface) => {
-  const { name, capital, subregion, population, area, nativeName, flag } =
-    props;
+  const {
+    name,
+    capital,
+    subregion,
+    population,
+    area,
+    nativeName,
+    flag,
+    wishlist = false,
+    action = (name = "") => {},
+  } = props;
+
+  const handleClick = () => {
+    action(name);
+  };
 
   return (
     <Card
@@ -88,10 +99,20 @@ const Item = (props: ItemInterface) => {
       </CardContent>
       <CardActions>
         <ThemeProvider theme={theme}>
-          <Button href={name} variant="contained">
+          <Button href={`/${name}`} variant="contained">
             View
           </Button>
         </ThemeProvider>
+        {wishlist && (
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleClick}
+            style={{ marginLeft: "40%" }}
+          >
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

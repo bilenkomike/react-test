@@ -2,19 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import InstagramIcon from "@mui/icons-material/Instagram";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const Footer = () => {
   return (
@@ -22,15 +12,26 @@ const Footer = () => {
       <Typography variant="h6" align="center" gutterBottom>
         Footer
       </Typography>
-      <Typography
-        variant="subtitle1"
-        align="center"
-        color="text.secondary"
-        component="p"
-      >
-        Something here to give the footer a purpose!
+
+      <Typography align="center">
+        <Link href="https://www.instagram.com/" target="_blank">
+          <InstagramIcon />
+        </Link>
+        <Link
+          href="https://www.pinterest.com/"
+          target="_blank"
+          style={{ marginLeft: 30 }}
+        >
+          <PinterestIcon />
+        </Link>
+        <Link
+          href="https://www.facebook.com/"
+          target="_blank"
+          style={{ marginLeft: 30 }}
+        >
+          <FacebookIcon />
+        </Link>
       </Typography>
-      <Copyright />
     </Box>
   );
 };
