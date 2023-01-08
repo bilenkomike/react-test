@@ -14,11 +14,16 @@ const Footer = () => {
       </Typography>
 
       <Typography align="center">
-        <Link href="https://www.instagram.com/" target="_blank">
+        <Link
+          href="https://www.instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <InstagramIcon />
         </Link>
         <Link
           href="https://www.pinterest.com/"
+          rel="noopener noreferrer"
           target="_blank"
           style={{ marginLeft: 30 }}
         >
@@ -26,6 +31,7 @@ const Footer = () => {
         </Link>
         <Link
           href="https://www.facebook.com/"
+          rel="noopener noreferrer"
           target="_blank"
           style={{ marginLeft: 30 }}
         >

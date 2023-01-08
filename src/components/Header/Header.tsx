@@ -3,22 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Button } from "@mui/material";
 
-import {
-  Link as RouterLink,
-  LinkProps as RouterLinkProps,
-} from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { LinkProps } from "@mui/material/Link";
-
-const LinkBehavior = React.forwardRef<
-  HTMLAnchorElement,
-  Omit<RouterLinkProps, "to"> & { href: RouterLinkProps["to"] }
->((props, ref) => {
-  const { href, ...other } = props;
-  return (
-    <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />
-  );
-});
+import LinkBehavior from "../../helpers/LinksBehavior";
 
 const theme = createTheme({
   palette: {
