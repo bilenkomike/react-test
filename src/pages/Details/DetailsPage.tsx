@@ -65,7 +65,7 @@ const DetailsPage = () => {
   };
 
   if (loading) {
-    return <CircularProgress style={{ margin: "auto" }} />;
+    return <Container><CircularProgress style={{ margin: "auto" }} /></Container>;
   }
 
   return (
